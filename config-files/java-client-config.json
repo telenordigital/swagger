@@ -1,0 +1,19 @@
+{
+    "sortParamsByRequiredFlag": true,
+    "ensureUniqueParams": true,
+    "modelPackage": "com.telenordigital.payment.client",
+    "apiPackage": "com.telenordigital.payment.api",
+    "invokerPackage": "com.telenordigital.payment",
+    "groupId": "com.telenordigital",
+    "artifactId": "telenordigital-payment",
+    "artifactVersion": "0.0.1",
+    "sourceFolder": "src/main/java",
+    "localVariablePrefix": "",
+    "serializableModel": false,
+    "bigDecimalAsString": false,
+    "fullJavaUtil": false,
+    "hideGenerationTimestamp": false,
+    "dateLibrary": "",
+    "useRxJava": true,
+    "library": "retrofit2"
+}
