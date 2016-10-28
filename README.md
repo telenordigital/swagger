@@ -1,12 +1,12 @@
 # Telenor Digital Swagger specs
 
-This repo contains all Telenor Digital API endpoint swagger specs.
+This repository contains all Telenor Digital API endpoint swagger specs.
 
 # Install
 You need to have swagger-codegen installed. On osx: `brew install swagger-codegen`
 
 # Create Clients from command line 
-To create a client in a given lagnuage (eg. Ruby gem client) run the following
+To create a client in a given language (eg. Ruby gem client) run the following
 
 ```
     cd path/to/root/of/td-swagger/
