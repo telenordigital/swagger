@@ -1,0 +1,475 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Telenor Connect Payment Client
+  description: The payment client for Telenor Connect Payment
+  termsOfService: http://docs.telenordigital.com
+  contact:
+    name: telenor digital connect
+    url: http://docs.telenordigital.com
+  license:
+    name: UNLICENSED
+    # url: http://creativecommons.org/licenses/by/4.0/
+externalDocs:
+  url: http://docs.telenordigital.com
+  description: More info, and getting started guides available at docs.telenordigital.com
+basePath: /
+host: localhost:10106
+showRequestHeaders: true
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /transactions:
+    post:
+      parameters:
+      - name: transaction
+        in: body
+        description: Creates a new transaction
+        required: true
+        schema: 
+          $ref: "#/definitions/NewTransaction"
+      description: Creates a new transaction
+      summary: Will create a new transaction based on the provided 'NewTransaction'
+      operationId: createTransaction
+      security:
+        - telenorDigitalBasicAuth: []
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: transaction response
+          schema:
+            $ref: '#/definitions/Transaction'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /transactions/{transactionId}:
+    get:
+      parameters:
+      - name: transactionId
+        in: path
+        description: Transaction ID
+        required: true
+        type: string
+      description: Whatever2
+      summary: whatever
+      operationId: getTransactionById
+      security:
+        - telenorDigitalBasicAuth: []
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: transaction response
+          schema:
+            $ref: '#/definitions/Transaction'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /agreements:
+    post:
+      parameters:
+      - name: agreement
+        in: body
+        description: Prepares a charging agreement which will perform a transaction in a specified interval.
+        required: true
+        schema: 
+          $ref: "#/definitions/NewAgreement"
+      description: Creates a new agreement
+      summary: Will create a new agreement based on the provided 'NewAgreement'
+      operationId: createAgreement
+      security:
+        - telenorDigitalBasicAuth: []
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: agreement response
+          schema:
+            $ref: '#/definitions/Agreement'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    get:
+      parameters:
+      - name: connectID
+        in: query
+        description: 
+        required: true
+        type: string
+      - name: state
+        in: query
+        description: 
+        required: true
+        type: string
+      description: Get all Charging Agreements for a CONNECT ID, optionally filtered on state. Each merchant will only see their own Charging Agreements.
+      summary: Get all agreements for ConnectID
+      operationId: getAgreementsForConnectID
+      security:
+        - telenorDigitalBasicAuth: []
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: agreement response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Agreement'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  
+  /agreements/{id}:
+    get:
+      parameters:
+      - name: id
+        in: path
+        description: Agreement ID (naming is inconsistent here)
+        required: true
+        type: string
+      description: Retrieves the given Charging Agreement.
+      summary: Get agreement with given ID
+      operationId: getAgreementWithID
+      security:
+        - telenorDigitalBasicAuth: []
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Get agreement with given ID
+          schema:
+            $ref: '#/definitions/Agreement'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+securityDefinitions:
+  telenorDigitalBasicAuth:
+    type: basic
+    description: Basic auth for the Telenor Digital Connect payment api
+
+definitions:
+  ErrorModel:
+    type: object
+    required:
+      - code
+      - message
+    properties:
+      errorNamespace:
+        type: string
+      errorCode:
+        type: string #who knows what this really is.. doc does not say
+        # type: integer
+        # format: int32
+      errorMessage:
+        type: string
+  Link:
+    required:
+      - rel
+      - href
+    properties:
+      rel: 
+        type: string
+        description: I actually don't know what this is
+      href:
+        type: string
+        description: The url for which the user needs to visit to complete the transaction
+
+  Transaction:
+    required:
+      - orderId
+      - purchaseDescription
+      - amount
+      - vatRate
+      - successRedirect
+      - cancelRedirect
+    properties:
+      amount:
+        type: string
+        description: The total amount to be charged together with the currency to charge it in.
+        pattern: /^(?:AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD) \d+\.\d\d$/
+      vatRate:
+        type: string
+        description: The VAT percentage for the transaction as a decimal number.
+      orderId:
+        type: string
+        description: Your ID for the transaction. This is used to make it easier for you to find the transaction later. You can use this ID to check the status of a transaction in the call called getOrder. Maximum length is 100 characters.
+      purchaseDescription:
+        type: string
+        description: A human readable description of the purchase. This is what is shown as the header in the payment information on the payment page. This will also be the information showing up on the invoice on the means of pay. Maximum length is 1023 characters.
+      successRedirect:
+        type: string
+        description: The URI you want the payment page to redirect the customer to if the purchase is successfully charged. Maximum length is 145 characters.
+      cancelRedirect:
+        type: string
+        description: The URI you want the payment page to redirect the customer to if the purchased is canceled by the customer. Maximum length is 145 characters.
+      merchantName:
+        type: string
+      connectId:
+        type: string
+      allowedPaymentMethods:
+        type: string
+      products:
+        type: array
+        description: A list of the products being purchased. If you choose to have this list of products it must be complete and the sum of the prices must match the amount and the average VAT percentage must match the vatRate given in this object.
+        items:
+          $ref: '#/definitions/Product'
+      chargeToken:
+        type: string
+      chargingAgreementId:
+        type: string
+      id:
+        type: string
+      vatAmount:
+        type: string
+      startTime:
+        type: string
+      state:
+        type: string
+      returnCode:
+        type: string
+      chargedPaymentMethod:
+        type: string
+      previousTransactionId:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/Link'
+      completedTime:
+        type: string
+      sourceOfFundsId:
+        type: string
+      sourceOfFundsCode:
+        type: string
+      refundReason:
+        type: string
+      refundIssuer:
+        type: string
+      refundForTransactionId:
+        type: string
+      type:
+        type: string
+      markedAsFraudTime:
+        type: string
+      clientCorrelator:
+        type: string
+      paymentInstrument:
+        type: string
+      # metadata: 
+      #   type: object #{} #not supported. We must know what this is.
+      attributes:
+        type: string
+      vatModel:
+        type: string
+      markedAsFraud:
+        type: boolean
+# transactionId: #inconsistent, id, not transactionId
+#   type: string
+# status: #inconsistent. state, not status
+#   type: string
+# chargingAgreement: #inconsistent chargingAgreementId, not chargingAgreement
+#   type: string
+
+
+
+  NewTransaction:
+    required:
+      - orderId
+      - purchaseDescription
+      - amount
+      - vatRate
+      - successRedirect
+      - cancelRedirect
+    properties:
+      orderId:
+        type: string
+        description: Your ID for the transaction. This is used to make it easier for you to find the transaction later. You can use this ID to check the status of a transaction in the call called getOrder. Maximum length is 100 characters.
+      purchaseDescription:
+        type: string
+        description: A human readable description of the purchase. This is what is shown as the header in the payment information on the payment page. This will also be the information showing up on the invoice on the means of pay. Maximum length is 1023 characters. 
+      amount:
+        type: string
+        description: The total amount to be charged together with the currency to charge it in.
+        #for some reason the "\" is being escaped. Don't know how to unescape it.
+        pattern: /^(?:AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD) \d+\.\d\d$/
+      vatRate:
+        type: string
+        description: The VAT percentage for the transaction as a decimal number.
+      successRedirect:
+        type: string
+        description: The URI you want the payment page to redirect the customer to if the purchase is successfully charged. Maximum length is 145 characters.
+      cancelRedirect:
+        type: string
+        description: The URI you want the payment page to redirect the customer to if the purchased is canceled by the customer. Maximum length is 145 characters. 
+      products:
+        type: array
+        description: A list of the products being purchased. If you choose to have this list of products it must be complete and the sum of the prices must match the amount and the average VAT percentage must match the vatRate given in this object.
+        items:
+          $ref: '#/definitions/Product'
+
+  Product:
+    required:
+      - name
+      - price
+      - vatRate
+    properties:
+      productId:
+        type: string
+      name:
+        type: string
+        description: The name of the product. This will be in the list below the purchaseDescription field on the payment page for the user. Maximum length is 145 characters.
+      price:
+        type: string
+        description: The price of the product in the same format as amount above.
+      vatRate:
+        type: string
+        description: The VAT percentage of the product.
+      sku:
+        type: string
+        description: The stock keeping unit id used to identify the product in the rights system. Use this only if you want us to grant rights for your users automatically when the purchase is done. If you use a sku a timeSpec is also required. Maximum length is 145 characters.
+      timeSpec:
+        type: string
+        description: The time period this right should be set for the user.
+
+  VerificationTransaction:
+    properties:
+      amount:
+        type: string
+        pattern: /^(?:AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD) \d+\.\d\d$/
+      vatRate:
+        type: string
+      orderId:
+        type: string
+      purchaseDescription:
+        type: string
+      successRedirect:
+        type: string
+      cancelRedirect:
+        type: string
+      merchantName:
+        type: string
+      connectId:
+        type: string
+      allowedPaymentMethods:
+        type: string
+      products:
+        type: array
+        items:
+          $ref: '#/definitions/Product'
+      chargeToken:
+        type: string
+      chargingAgreementId:
+        type: string
+      id:
+        type: string
+      vatAmount:
+        type: string
+      startTime:
+        type: string
+      state:
+        type: string
+      returnCode:
+        type: string
+      chargedPaymentMethod:
+        type: string
+      previousTransactionId:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/Link'
+      completedTime:
+        type: string
+      sourceOfFundsId:
+        type: string
+      sourceOfFundsCode:
+        type: string
+      refundReason:
+        type: string
+      refundIssuer:
+        type: string
+      refundForTransactionId:
+        type: string
+      type:
+        type: string
+      markedAsFraudTime:
+        type: string
+      clientCorrelator:
+        type: string
+      paymentInstrument:
+        type: string
+      # metadata:
+      #   type: object # {}, What should this be?
+      attributes:
+        type: string
+      vatModel:
+        type: string
+      markedAsFraud:
+        type: boolean
+      sku:
+        type: string #not sure if this should be here. Probably not
+      timeSpec:
+        type: string #not sure if this should be here. Probably not
+
+  Agreement:
+    properties:
+      id:
+        type: string
+      verificationTransaction:
+        $ref: '#/definitions/VerificationTransaction'
+      generation:
+        type: string
+      state:
+        type: string
+      links:
+        type: array
+        items:
+          $ref: '#/definitions/Link'
+      creationTime:
+        type: string
+      merchantName:
+        type: string
+      verificationTransactionId:
+        type: string
+      connectId:
+        type: string
+      recurrenceTimeSpec:
+        type: string
+      paymentMethod:
+        type: string
+      paymentMethodId:
+        type: string
+      subscriptionId:
+        type: string
+      paymentInstrument:
+        type: string
+
+  NewAgreement:
+    required:
+      - connectId
+      - merchantName
+      - recurrenceTimeSpec
+      - verificationTransaction
+    properties:
+      connectId:
+        type: string
+      merchantName:
+        type: string
+      recurrenceTimeSpec:
+        type: string
+      verificationTransaction:
+        $ref: '#/definitions/VerificationTransaction'
+
