@@ -1,0 +1,14 @@
+{
+    "sortParamsByRequiredFlag": true,	
+    "ensureUniqueParams": true,
+    "gemName": "telenor_digital_client_api",
+    "moduleName": "TelenorDigitalClientApi",
+    "gemVersion": "0.0.1",
+    "gemLicense": "MIT",
+    "gemHomepage": "http://docs.telenordigital.com/",
+    "gemSummary": "Client library for the Telenor Connect Payment API",
+    "gemDescription": "Low level client library for the Telenor Connect Payment API.",
+    "gemAuthor": "Telenor Digital - Stephan Nordnes Eriksen ???",
+    "gemAuthorEmail": "stfu@tldgtz.com"
+}
+
