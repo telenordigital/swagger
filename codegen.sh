@@ -994,28 +994,35 @@ client() {
   _debug printf "client() \${name}: %s\n" "${_name}"
   
   local _languages=(java ruby)
-  local _servers=(aspnet5 python-flask jaxrs jaxrs-cxf jaxrs-resteasy jaxrs-spec inflector nancyfx nodejs-server scalatra silex-PHP sinatra rails5 slim spring haskell lumen go-server)
-  if [[ "${_name}" == "all" ]]
+  local _subdir="client"
+  local _servers=( aspnet5 python-flask jaxrs jaxrs-cxf jaxrs-resteasy jaxrs-spec inflector nancyfx nodejs-server scalatra silex-PHP sinatra rails5 slim spring haskell lumen go-server )
+  if [[ "${_name}" == "all-clients" ]]
   then
     printf "Generating all clients!\n"
     
     _languages=( android async-scala cwiki csharp cpprest dart flash go groovy java javascript javascript-closure-angular jmeter objc perl php python qt5cpp ruby scala dynamic-html html html2 swagger swagger-yaml swift tizen typescript-angular2 typescript-angular typescript-node typescript-fetch akka-scala CsharpDotNet2 clojure )
+  elif [[ "${_name}" == "all-servers" ]]
+  then
+    printf "Generating all servers!\n"
+    _subdir="server"
+    _languages=( aspnet5 python-flask jaxrs jaxrs-cxf jaxrs-resteasy jaxrs-spec inflector nancyfx nodejs-server scalatra silex-PHP sinatra rails5 slim spring haskell lumen go-server )
   elif [[ -n "${_name}" ]]
   then
-    _languages=(${_name})   
+    _languages=(${_name})
+    if [[ ${_servers[*]} =~ (^|[[:space:]])"${_name}"($|[[:space:]]) ]] ; then
+      _subdir="server"
+    fi
   fi
   
-  echo ${_languages[*]}
   for LANGUAGE in ${_languages[*]}
   do
-    printf "Generating client for %s!\n" "${LANGUAGE}"
     if [ ! -f ./config-files/${LANGUAGE}-client-config.json ]
     then
-        printf "Generating without any config file\n"
-        swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/clients/${LANGUAGE}/ >/dev/null 
+      printf "Generating ${_subdir} for %s! Config file: NO\n" "${LANGUAGE}"
+      swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/${_subdir}/${LANGUAGE}/ >/dev/null 
     else
-        printf "Generating with config file\n"
-        swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/clients/${LANGUAGE}/ -c ./config-files/${LANGUAGE}-client-config.json >/dev/null
+      printf "Generating ${_subdir} for %s! Config file: YES\n" "${LANGUAGE}"
+      swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/${_subdir}/${LANGUAGE}/ -c ./config-files/${LANGUAGE}-client-config.json >/dev/null
     fi
   done
 }
