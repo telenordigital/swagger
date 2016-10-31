@@ -1,0 +1,5 @@
+{
+	"packageName": "IO.Swagger",
+	"packageVersion": "1.0.0",
+	"clientPackage": "IO.Swagger.Client"
+}

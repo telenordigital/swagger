@@ -1,0 +1,11 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"projectName": "generated from info.title or \"swagger-clj-client\"",
+	"projectDescription": "using info.description or \"Client library of <projectNname>\"",
+	"projectVersion": "using info.version or \"1.0.0\"",
+	"projectUrl": "using info.contact.url or not included in project.clj",
+	"projectLicenseName": "using info.license.name or not included in project.clj",
+	"projectLicenseUrl": "using info.license.url or not included in project.clj",
+	"baseNamespace": "generated from projectName"
+}

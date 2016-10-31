@@ -1,0 +1,15 @@
+{
+	"packageName": "IO.Swagger",
+	"packageVersion": "1.0.0",
+	"sourceFolder": "src",
+	"packageGuid": null,
+	"targetFramework": "v4.5",
+	"sortParamsByRequiredFlag": true,
+	"useDateTimeOffset": false,
+	"useCollection": false,
+	"returnICollection": false,
+	"optionalMethodArgument": true,
+	"optionalAssemblyInfo": true,
+	"optionalProjectFile": true,
+	"optionalEmitDefaultValues": false
+}

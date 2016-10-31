@@ -1,0 +1,11 @@
+{
+	"packageName": "IO.Swagger",
+	"packageVersion": "1.0.0",
+	"sourceFolder": "src",
+	"sortParamsByRequiredFlag": true,
+	"optionalProjectFile": true,
+	"useDateTimeOffset": false,
+	"useCollection": false,
+	"returnICollection": false,
+	"immutable": true
+}

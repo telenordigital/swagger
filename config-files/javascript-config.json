@@ -1,0 +1,18 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"sourceFolder": "src",
+	"localVariablePrefix": null,
+	"invokerPackage": null,
+	"apiPackage": null,
+	"modelPackage": null,
+	"projectName": "generated from info.title or \"swagger-js-client\"",
+	"moduleName": "generated from <projectName>",
+	"projectDescription": "using info.description or \"Client library of <projectName>\"",
+	"projectVersion": "using info.version or \"1.0.0\"",
+	"projectLicenseName": "using info.license.name",
+	"usePromises": false,
+	"emitModelMethods": false,
+	"emitJSDoc": true,
+	"useInheritance": true
+}

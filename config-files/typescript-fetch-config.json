@@ -1,0 +1,8 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"modelPropertyNaming": "camelCase",
+	"supportsES6": false,
+	"npmName": null,
+	"npmVersion": null
+}

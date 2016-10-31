@@ -1,0 +1,19 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"projectName": null,
+	"responseAs": null,
+	"unwrapRequired": null,
+	"podSource": null,
+	"podVersion": null,
+	"podAuthors": null,
+	"podSocialMediaURL": null,
+	"podDocsetURL": null,
+	"podLicense": null,
+	"podHomepage": null,
+	"podSummary": null,
+	"podDescription": null,
+	"podScreenshots": null,
+	"podDocumentationURL": null,
+	"swiftUseApiNamespace": null
+}

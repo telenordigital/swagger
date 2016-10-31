@@ -1,0 +1,9 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"browserClient": null,
+	"pubName": null,
+	"pubVersion": null,
+	"pubDescription": null,
+	"sourceFolder": null
+}

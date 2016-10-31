@@ -1,0 +1,9 @@
+{
+	"coreData": false,
+	"classPrefix": "SWG",
+	"podName": "SwaggerClient",
+	"podVersion": "1.0.0",
+	"authorName": "Swagger",
+	"authorEmail": "apiteam@swagger.io",
+	"gitRepoURL": "https://github.com/swagger-api/swagger-codegen"
+}

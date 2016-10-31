@@ -1,0 +1,13 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"modelPackage": null,
+	"apiPackage": null,
+	"variableNamingConvention": "snake_case",
+	"invokerPackage": null,
+	"packagePath": null,
+	"srcBasePath": null,
+	"gitUserId": null,
+	"gitRepoId": null,
+	"artifactVersion": null
+}

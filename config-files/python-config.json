@@ -1,0 +1,5 @@
+{
+	"packageName": "swagger_client",
+	"packageVersion": "1.0.0",
+	"sortParamsByRequiredFlag": true
+}

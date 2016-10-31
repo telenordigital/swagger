@@ -1,0 +1,7 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"controllerPackage": "controllers",
+	"defaultController": "default_controller",
+	"supportPython2": false
+}

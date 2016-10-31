@@ -1,0 +1,6 @@
+{
+	"moduleName": "SwaggerClient",
+	"moduleVersion": "1.0.0",
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true
+}

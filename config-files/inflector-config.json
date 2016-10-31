@@ -1,0 +1,17 @@
+{
+	"sortParamsByRequiredFlag": true,
+	"ensureUniqueParams": true,
+	"modelPackage": null,
+	"apiPackage": null,
+	"invokerPackage": null,
+	"groupId": null,
+	"artifactId": null,
+	"artifactVersion": null,
+	"sourceFolder": null,
+	"localVariablePrefix": null,
+	"serializableModel": false,
+	"bigDecimalAsString": false,
+	"fullJavaUtil": false,
+	"hideGenerationTimestamp": null,
+	"dateLibrary": null
+}
