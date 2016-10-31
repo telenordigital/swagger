@@ -985,6 +985,84 @@ list() {
   swagger-codegen langs
 }
 
+
+###############################################################################
+# Commands
+# ========.....................................................................
+#
+# List command group structure:
+#
+# desc list "Shows available languages for server and clients combined"   - List all languages available
+# list() { : }   - The command called by the user.
+#
+#
+# desc client <<HEREDOC
+#   Usage:
+#     $_ME client
+#
+#   Description:
+#     Print "Hello, World!"
+#
+#     For usage formatting conventions see:
+#     - http://docopt.org/
+#     - http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html
+# HEREDOC
+# client() {
+#   printf "Hello, World!\n"
+# }
+#
+###############################################################################
+
+# Client Section #############################################################
+
+# --------------------------------------------------------------------- client
+
+desc "configs" <<HEREDOC
+Usage:
+  ${_ME} configs
+
+Description:
+  Generates basic config files for each language. Puts them in the "config-files" directory
+HEREDOC
+configs() {
+  _debug printf "configs() \${0:-}: %s\n" "${0:-}"
+  _debug printf "configs() \${_COMMAND_ARGV[0]:-}: %s\n" "${_COMMAND_ARGV[0]:-}"
+  _debug \
+    printf "configs() \${_COMMAND_PARAMETERS[0]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[0]:-}"
+  _debug printf "configs() \${1:-}: %s\n" "${1:-}"
+  _debug printf "configs() \${_COMMAND_ARGV[1]:-}: %s\n" "${_COMMAND_ARGV[1]:-}"
+  _debug \
+    printf "configs() \${_COMMAND_PARAMETERS[1]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[1]:-}"
+  _debug printf "configs() \${2:-}: %s\n" "${2:-}"
+  _debug printf "configs() \${_COMMAND_ARGV[2]:-}: %s\n" "${_COMMAND_ARGV[2]:-}"
+  _debug \
+    printf "configs() \${_COMMAND_PARAMETERS[2]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[2]:-}"
+  # Each expanded to string:
+  _debug printf "configs() \${*:-}: %s\n" "${*:-}"
+  _debug printf "configs() \${_COMMAND_ARGV[*]:-}: %s\n" "${_COMMAND_ARGV[*]:-}"
+  _debug \
+    printf "configs() \${_COMMAND_PARAMETERS[*]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[*]:-}"
+
+    #all languaegs
+    _languages=( android async-scala cwiki csharp cpprest dart flash go groovy java javascript javascript-closure-angular jmeter objc perl php python qt5cpp ruby scala dynamic-html html html2 swagger swagger-yaml swift tizen typescript-angular2 typescript-angular typescript-node typescript-fetch akka-scala CsharpDotNet2 clojure aspnet5 python-flask jaxrs jaxrs-cxf jaxrs-resteasy jaxrs-spec inflector nancyfx nodejs-server scalatra silex-PHP sinatra rails5 slim spring haskell lumen go-server )
+    mkdir -p ./config-files/
+    for LANGUAGE in ${_languages[*]}
+    do
+      if [ ! -f "./config-files/$LANGUAGE-config.json" ]
+      then
+        ./config-gen.sh $LANGUAGE > ./config-files/$LANGUAGE-config.json
+        echo "Configs created for $LANGUAGE"
+      else
+        echo "skipping $LANGUAGE"
+      fi
+    done
+
+}
+
 ###############################################################################
 # Run Program
 ###############################################################################
