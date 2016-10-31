@@ -7,7 +7,9 @@
 #  \___  >____/|__|_|  /__|_|  (____  /___|  /\____ /____  >
 #      \/            \/      \/     \/     \/      \/    \/
 #
-# Boilerplate for creating a bash program with commands.
+# Boilerplate for creating a bash program with commands. https://github.com/alphabetum/bash-boilerplate
+#
+# LICENSE: MIT https://github.com/alphabetum/bash-boilerplate/blob/master/LICENSE
 #
 # Depends on:
 #  list
@@ -749,9 +751,7 @@ help() {
 
 
 Tool for generating clients for the different Telenor Digital APIs, includinsg CONNECT payment (and CONNECT ID soon).
-
-Run with no options to create Java, JavaScript, and Ruby clients for the payment API.  
-
+ 
 Version: ${_VERSION}
 
 Usage:
@@ -761,9 +761,6 @@ Usage:
 
 Options:
   -h --help      Show this screen.
-  -l --languages Select which language to generate for. Default: "default". Will create Java, JavaScript and Ruby clients. Avaliable: use -a --available to see list of all available
-  -a --available Will list all available languages.
-  -A --all       Will create all available clients. Same as "-l all"
 
 Help:
   ${_ME} help [<command>]
@@ -801,114 +798,6 @@ commands() {
 # Commands
 # ========.....................................................................
 #
-# Example command group structure:
-#
-# desc example ""   - Optional. A short description for the command.
-# example() { : }   - The command called by the user.
-#
-#
-# desc example <<HEREDOC
-#   Usage:
-#     $_ME example
-#
-#   Description:
-#     Print "Hello, World!"
-#
-#     For usage formatting conventions see:
-#     - http://docopt.org/
-#     - http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html
-# HEREDOC
-# example() {
-#   printf "Hello, World!\n"
-# }
-#
-###############################################################################
-
-# Example Section #############################################################
-
-# --------------------------------------------------------------------- example
-
-desc "example" <<HEREDOC
-Usage:
-  ${_ME} example [<name>] [--farewell]
-
-Options:
-  --farewell  Print "Goodbye, World!"
-
-Description:
-  Print "Hello, World!"
-HEREDOC
-example() {
-  # These debug statements demonstrate the different behaviors of the
-  # positional parameters, the special variables, and the two generated
-  # command argument arrays.
-  #
-  # Note in particular that $@ and $* omit the script name like the
-  # $_COMMAND_PARAMETERS array does, whereas the positional parameter variables
-  # $0, $1, $2 do include it, like the $_COMMAND_ARGV array.
-  #
-  # Individual elements 0, 1, and 2 of each:
-  _debug printf "example() \${0:-}: %s\n" "${0:-}"
-  _debug printf "example() \${_COMMAND_ARGV[0]:-}: %s\n" "${_COMMAND_ARGV[0]:-}"
-  _debug \
-    printf "example() \${_COMMAND_PARAMETERS[0]:-}: %s\n" \
-    "${_COMMAND_PARAMETERS[0]:-}"
-  _debug printf "example() \${1:-}: %s\n" "${1:-}"
-  _debug printf "example() \${_COMMAND_ARGV[1]:-}: %s\n" "${_COMMAND_ARGV[1]:-}"
-  _debug \
-    printf "example() \${_COMMAND_PARAMETERS[1]:-}: %s\n" \
-    "${_COMMAND_PARAMETERS[1]:-}"
-  _debug printf "example() \${2:-}: %s\n" "${2:-}"
-  _debug printf "example() \${_COMMAND_ARGV[2]:-}: %s\n" "${_COMMAND_ARGV[2]:-}"
-  _debug \
-    printf "example() \${_COMMAND_PARAMETERS[2]:-}: %s\n" \
-    "${_COMMAND_PARAMETERS[2]:-}"
-  # Each expanded to string:
-  _debug printf "example() \${*:-}: %s\n" "${*:-}"
-  _debug printf "example() \${_COMMAND_ARGV[*]:-}: %s\n" "${_COMMAND_ARGV[*]:-}"
-  _debug \
-    printf "example() \${_COMMAND_PARAMETERS[*]:-}: %s\n" \
-    "${_COMMAND_PARAMETERS[*]:-}"
-
-  # Set default greeting.
-  local _greeting="Hello"
-  # Initialize arguments array.
-  local _arguments=()
-
-  # Parse command arguments.
-  for __arg in "${_COMMAND_ARGV[@]:-}"
-  do
-    case ${__arg} in
-      --farewell) _greeting="Goodbye";;
-      -*) _die printf "Unexpected option: %s\n" "${__arg}";;
-      *) _arguments+=(${__arg});;
-    esac
-  done
-
-  _debug printf "example() \${_arguments[0]:-}: %s\n" "${_arguments[0]:-}"
-  _debug printf "example() \${_arguments[1]:-}: %s\n" "${_arguments[1]:-}"
-
-  local _name=${_arguments[1]:-}
-
-  _debug printf "example() \${greeting}: %s\n" "${_greeting}"
-  _debug printf "example() \${name}: %s\n" "${_name}"
-
-  if [[ "${_name}" == "Moon" ]]
-  then
-    printf "%s, Luna!\n" "${_greeting}"
-  elif [[ -n "${_name}" ]]
-  then
-    printf "%s, %s!\n" "${_greeting}" "${_name}"
-  else
-    printf "%s, World!\n" "${_greeting}"
-  fi
-}
-
-
-###############################################################################
-# Commands
-# ========.....................................................................
-#
 # Client command group structure:
 #
 # desc client "Generates client for given language, or the default Java, JavaScript, and Ruby."   - Optional. A short description for the command.
@@ -938,10 +827,10 @@ example() {
 
 desc "client" <<HEREDOC
 Usage:
-  ${_ME} client [<language>] [--farewell]
+  ${_ME} client [<language>]
 
 Description:
-  Print "Hello, World!"
+  Generates client or server in language provided. See "list" for available languages.
 HEREDOC
 client() {
   # These debug statements demonstrate the different behaviors of the
@@ -1027,6 +916,73 @@ client() {
       swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/${_subdir}/${LANGUAGE}/ -c ./config-files/${LANGUAGE}-client-config.json >/dev/null
     fi
   done
+}
+
+
+
+###############################################################################
+# Commands
+# ========.....................................................................
+#
+# List command group structure:
+#
+# desc list "Shows available languages for server and clients combined"   - List all languages available
+# list() { : }   - The command called by the user.
+#
+#
+# desc client <<HEREDOC
+#   Usage:
+#     $_ME client
+#
+#   Description:
+#     Print "Hello, World!"
+#
+#     For usage formatting conventions see:
+#     - http://docopt.org/
+#     - http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html
+# HEREDOC
+# client() {
+#   printf "Hello, World!\n"
+# }
+#
+###############################################################################
+
+# Client Section #############################################################
+
+# --------------------------------------------------------------------- client
+
+desc "list" <<HEREDOC
+Usage:
+  ${_ME} list
+
+Description:
+  Prints out all available languages
+HEREDOC
+list() {
+  _debug printf "list() \${0:-}: %s\n" "${0:-}"
+  _debug printf "list() \${_COMMAND_ARGV[0]:-}: %s\n" "${_COMMAND_ARGV[0]:-}"
+  _debug \
+    printf "list() \${_COMMAND_PARAMETERS[0]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[0]:-}"
+  _debug printf "list() \${1:-}: %s\n" "${1:-}"
+  _debug printf "list() \${_COMMAND_ARGV[1]:-}: %s\n" "${_COMMAND_ARGV[1]:-}"
+  _debug \
+    printf "list() \${_COMMAND_PARAMETERS[1]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[1]:-}"
+  _debug printf "list() \${2:-}: %s\n" "${2:-}"
+  _debug printf "list() \${_COMMAND_ARGV[2]:-}: %s\n" "${_COMMAND_ARGV[2]:-}"
+  _debug \
+    printf "list() \${_COMMAND_PARAMETERS[2]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[2]:-}"
+  # Each expanded to string:
+  _debug printf "list() \${*:-}: %s\n" "${*:-}"
+  _debug printf "list() \${_COMMAND_ARGV[*]:-}: %s\n" "${_COMMAND_ARGV[*]:-}"
+  _debug \
+    printf "list() \${_COMMAND_PARAMETERS[*]:-}: %s\n" \
+    "${_COMMAND_PARAMETERS[*]:-}"
+
+ 
+  swagger-codegen langs
 }
 
 ###############################################################################
