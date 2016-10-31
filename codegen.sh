@@ -907,13 +907,13 @@ client() {
   
   for LANGUAGE in ${_languages[*]}
   do
-    if [ ! -f ./config-files/${LANGUAGE}-client-config.json ]
+    if [ ! -f ./config-files/${LANGUAGE}-config.json ]
     then
       printf "Generating ${_subdir} for %s! Config file: NO\n" "${LANGUAGE}"
       swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/${_subdir}/${LANGUAGE}/ >/dev/null 
     else
       printf "Generating ${_subdir} for %s! Config file: YES\n" "${LANGUAGE}"
-      swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/${_subdir}/${LANGUAGE}/ -c ./config-files/${LANGUAGE}-client-config.json >/dev/null
+      swagger-codegen generate -i ./payment-api-swagger.yml -l ${LANGUAGE} -o ./bin/${_subdir}/${LANGUAGE}/ -c ./config-files/${LANGUAGE}-config.json >/dev/null
     fi
   done
 }
