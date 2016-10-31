@@ -2,35 +2,48 @@
 
 This repository contains all Telenor Digital API endpoint swagger specs.
 
-# Install
-You need to have swagger-codegen installed. On osx: `brew install swagger-codegen`
+# Prerequisites
+You need to have swagger-codegen installed for these scripts to work. 
 
-# Create Clients from command line 
-To create a client in a given language (eg. Ruby gem client) run the following
+## OSx
+`brew install swagger-codegen`
 
+
+# Create clients with bash script
+There is an included `codegen.sh` which can be used to create clients as well as server-templates for the payment api. The clients and servers can be generated in a multitude of languages. Use `codegen.sh list` to see all available.
+
+To create the default clients (java, ruby, and javascript) run:
+
+```sh
+    codegen.sh client
 ```
-    cd path/to/root/of/td-swagger/
-    swagger-codegen generate -i ./payment-api-swagger.yml -l ruby -o ./bin/client/telenor-digital-payment-ruby-client/ -c ./config-files/ruby-client-config.json
+
+The generated clients will be put in the `bin` directory of this project, and put in further sub-folders `client` or `server`.  
+
+You can also choose which language to output, for example `java`:
+
+```sh
+    codegen.sh client java
 ```
 
-Now you should have your very own ruby client in you desired output folder (in this example `./bin/client/telenor-digital-payment-ruby-client/`).
+There exists two special parameters, the `all-clients` and `all-servers`, which will respectively create, as the name implies, all available clients or servers.
 
-Available languages can be found [Swagger-codegen github page](https://github.com/swagger-api/swagger-codegen/blob/master/README.md).
+More information about the codegen can be found at the [Swagger-codegen github page](https://github.com/swagger-api/swagger-codegen/).
 
 # Change to production mode in client
 
 This one depends on the output client language you chose. They are all similar, but still different due to the language.
 
-```
+```ruby
     #Boilerplate start:
     # Load the gem
     require 'telenor_digital_client_api'
 
     # Setup authorization
     TelenorDigitalClientApi.configure do |config|
-    # Configure HTTP basic authorization: telenorDigitalBasicAuth
-    config.username = 'YOUR USERNAME'
-    config.password = 'YOUR PASSWORD'
+        # Configure HTTP basic authorization: telenorDigitalBasicAuth
+        config.username = 'YOUR USERNAME'
+        config.password = 'YOUR PASSWORD'
     end
 
     api_instance = TelenorDigitalClientApi::DefaultApi.new
