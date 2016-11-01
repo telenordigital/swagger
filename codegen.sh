@@ -106,8 +106,9 @@ command_exists () {
 }
 if ! command_exists swagger-codegen ; then
   echo "does not exist"
+  alias swagger-codegen="java -jar swagger-codegen-cli.jar"
   #add aliases
-  shopt -s expand_aliases
+  # shopt -s expand_aliases
 fi
 
 
