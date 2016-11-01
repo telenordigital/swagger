@@ -100,6 +100,17 @@
 # Short form: set -u
 set -o nounset
 
+
+command_exists () {
+    type "$1" &> /dev/null ;
+}
+if ! command_exists swagger-codegen ; then
+  echo "does not exist"
+  #add aliases
+  shopt -s expand_aliases
+fi
+
+
 # Exit immediately if a pipeline returns non-zero.
 #
 # NOTE: this has issues. When using read -rd '' with a heredoc, the exit
