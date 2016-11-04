@@ -104,12 +104,12 @@ paths:
       parameters:
       - name: connectID
         in: query
-        description: 
+        description: ID of user
         required: true
         type: string
       - name: state
         in: query
-        description: 
+        description: state
         required: true
         type: string
       description: Get all Charging Agreements for a CONNECT ID, optionally filtered on state. Each merchant will only see their own Charging Agreements.
@@ -200,25 +200,33 @@ definitions:
         type: string
         description: The total amount to be charged together with the currency to charge it in.
         pattern: /^(?:AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD) \d+\.\d\d$/
+        default: USD 10.00
       vatRate:
         type: string
         description: The VAT percentage for the transaction as a decimal number.
+        default: 0.0
       orderId:
         type: string
         description: Your ID for the transaction. This is used to make it easier for you to find the transaction later. You can use this ID to check the status of a transaction in the call called getOrder. Maximum length is 100 characters.
+        default: Your order ID
       purchaseDescription:
         type: string
         description: A human readable description of the purchase. This is what is shown as the header in the payment information on the payment page. This will also be the information showing up on the invoice on the means of pay. Maximum length is 1023 characters.
+        default: Your purchase description
       successRedirect:
         type: string
         description: The URI you want the payment page to redirect the customer to if the purchase is successfully charged. Maximum length is 145 characters.
+        default: http://localhost/success
       cancelRedirect:
         type: string
         description: The URI you want the payment page to redirect the customer to if the purchased is canceled by the customer. Maximum length is 145 characters.
+        default: http://localhost/cancel
       merchantName:
         type: string
+        default: YourMerchantName
       connectId:
         type: string
+        default: 1234567890
       allowedPaymentMethods:
         type: string
       products:
@@ -297,23 +305,29 @@ definitions:
       orderId:
         type: string
         description: Your ID for the transaction. This is used to make it easier for you to find the transaction later. You can use this ID to check the status of a transaction in the call called getOrder. Maximum length is 100 characters.
+        default: Your order ID
       purchaseDescription:
         type: string
-        description: A human readable description of the purchase. This is what is shown as the header in the payment information on the payment page. This will also be the information showing up on the invoice on the means of pay. Maximum length is 1023 characters. 
+        description: A human readable description of the purchase. This is what is shown as the header in the payment information on the payment page. This will also be the information showing up on the invoice on the means of pay. Maximum length is 1023 characters.
+        default: Your purchase description 
       amount:
         type: string
         description: The total amount to be charged together with the currency to charge it in.
         #for some reason the "\" is being escaped. Don't know how to unescape it.
         pattern: /^(?:AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD) \d+\.\d\d$/
+        default: USD 10.00
       vatRate:
         type: string
         description: The VAT percentage for the transaction as a decimal number.
+        default: 0.0
       successRedirect:
         type: string
         description: The URI you want the payment page to redirect the customer to if the purchase is successfully charged. Maximum length is 145 characters.
+        default: http://localhost/success
       cancelRedirect:
         type: string
-        description: The URI you want the payment page to redirect the customer to if the purchased is canceled by the customer. Maximum length is 145 characters. 
+        description: The URI you want the payment page to redirect the customer to if the purchased is canceled by the customer. Maximum length is 145 characters.
+        default: http://localhost/cancel 
       products:
         type: array
         description: A list of the products being purchased. If you choose to have this list of products it must be complete and the sum of the prices must match the amount and the average VAT percentage must match the vatRate given in this object.
@@ -328,15 +342,19 @@ definitions:
     properties:
       productId:
         type: string
+        default: Your product ID
       name:
         type: string
         description: The name of the product. This will be in the list below the purchaseDescription field on the payment page for the user. Maximum length is 145 characters.
+        default: Your product name
       price:
         type: string
         description: The price of the product in the same format as amount above.
+        default: USD 10.00
       vatRate:
         type: string
         description: The VAT percentage of the product.
+        default: 0.0
       sku:
         type: string
         description: The stock keeping unit id used to identify the product in the rights system. Use this only if you want us to grant rights for your users automatically when the purchase is done. If you use a sku a timeSpec is also required. Maximum length is 145 characters.
@@ -349,20 +367,28 @@ definitions:
       amount:
         type: string
         pattern: /^(?:AED|AFN|ALL|AMD|ANG|AOA|ARS|AUD|AWG|AZN|BAM|BBD|BDT|BGN|BHD|BIF|BMD|BND|BOB|BRL|BSD|BTN|BWP|BYR|BZD|CAD|CDF|CHF|CLP|CNY|COP|CRC|CUC|CUP|CVE|CZK|DJF|DKK|DOP|DZD|EGP|ERN|ETB|EUR|FJD|FKP|GBP|GEL|GGP|GHS|GIP|GMD|GNF|GTQ|GYD|HKD|HNL|HRK|HTG|HUF|IDR|ILS|IMP|INR|IQD|IRR|ISK|JEP|JMD|JOD|JPY|KES|KGS|KHR|KMF|KPW|KRW|KWD|KYD|KZT|LAK|LBP|LKR|LRD|LSL|LYD|MAD|MDL|MGA|MKD|MMK|MNT|MOP|MRO|MUR|MVR|MWK|MXN|MYR|MZN|NAD|NGN|NIO|NOK|NPR|NZD|OMR|PAB|PEN|PGK|PHP|PKR|PLN|PYG|QAR|RON|RSD|RUB|RWF|SAR|SBD|SCR|SDG|SEK|SGD|SHP|SLL|SOS|SPL|SRD|STD|SVC|SYP|SZL|THB|TJS|TMT|TND|TOP|TRY|TTD|TVD|TWD|TZS|UAH|UGX|USD|UYU|UZS|VEF|VND|VUV|WST|XAF|XCD|XDR|XOF|XPF|YER|ZAR|ZMW|ZWD) \d+\.\d\d$/
+        default: USD 10.00
       vatRate:
         type: string
+        default: 0.0
       orderId:
         type: string
+        default: Your order ID
       purchaseDescription:
         type: string
+        default: Your purchase description
       successRedirect:
         type: string
+        default: http://localhost/success
       cancelRedirect:
         type: string
+        default: http://localhost/cancel
       merchantName:
         type: string
+        default: YourMerchantName
       connectId:
         type: string
+        default: 1234567890
       allowedPaymentMethods:
         type: string
       products:
@@ -442,12 +468,15 @@ definitions:
         type: string
       merchantName:
         type: string
+        default: YourMerchantName
       verificationTransactionId:
         type: string
       connectId:
         type: string
+        default: 1234567890
       recurrenceTimeSpec:
         type: string
+        default: R//P1M
       paymentMethod:
         type: string
       paymentMethodId:
@@ -466,10 +495,13 @@ definitions:
     properties:
       connectId:
         type: string
+        default: 1234567890
       merchantName:
         type: string
+        default: YourMerchantName
       recurrenceTimeSpec:
         type: string
+        default: R//P1M
       verificationTransaction:
         $ref: '#/definitions/VerificationTransaction'
 
