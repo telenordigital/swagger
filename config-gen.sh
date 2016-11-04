@@ -21,10 +21,10 @@ do
         #last param was a param. Check
         defaultValue=$(echo "$line" | sed -n '/^.*(Default: /p' | grep -o "(Default: .*)" | awk -F ': ' '{print substr($2, 1, length($2)-1)}' |tr "\n" " " | awk '{$1=$1};1')
         
-        if [[ -z "${defaultValue// }" ]]
+        if [[ -z "${defaultValue// }" ]] || [ "${defaultValue[@]}" = "<default>" ] 
         then
-            #We do not have default value. just add to array with "null"
-            parameterArray=("${parameterArray[@]}" $param "null")
+            #We do not have default value. just add to array with empty string("")
+            parameterArray=("${parameterArray[@]}" $param "\"\"")
         else
             #we have a key value pair
             numberRegex='^[0-9]+([.][0-9]+)?$'
