@@ -2,6 +2,6 @@
 	"modelPackage": "io.swagger.client.model",
 	"apiPackage": "io.swagger.client.api",
 	"packageVersion": "1.0.0",
-	"declspec": null,
-	"defaultInclude": null
+	"declspec": "",
+	"defaultInclude": ""
 }

@@ -2,7 +2,7 @@
 	"packageName": "IO.Swagger",
 	"packageVersion": "1.0.0",
 	"sourceFolder": "src",
-	"packageGuid": null,
+	"packageGuid": "",
 	"targetFramework": "v4.5",
 	"sortParamsByRequiredFlag": true,
 	"useDateTimeOffset": false,

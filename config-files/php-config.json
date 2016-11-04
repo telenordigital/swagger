@@ -1,15 +1,15 @@
 {
 	"sortParamsByRequiredFlag": true,
 	"ensureUniqueParams": true,
-	"modelPackage": null,
-	"apiPackage": null,
+	"modelPackage": "",
+	"apiPackage": "",
 	"variableNamingConvention": "snake_case",
-	"invokerPackage": null,
-	"packagePath": null,
-	"srcBasePath": null,
-	"composerVendorName": null,
-	"gitUserId": null,
-	"composerProjectName": null,
-	"gitRepoId": null,
-	"artifactVersion": null
+	"invokerPackage": "",
+	"packagePath": "",
+	"srcBasePath": "",
+	"composerVendorName": "",
+	"gitUserId": "",
+	"composerProjectName": "",
+	"gitRepoId": "",
+	"artifactVersion": ""
 }

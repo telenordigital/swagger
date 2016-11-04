@@ -1,8 +1,8 @@
 {
 	"sortParamsByRequiredFlag": true,
 	"ensureUniqueParams": true,
-	"invokerPackage": null,
-	"groupId": null,
-	"artifactId": null,
-	"artifactVersion": null
+	"invokerPackage": "",
+	"groupId": "",
+	"artifactId": "",
+	"artifactVersion": ""
 }

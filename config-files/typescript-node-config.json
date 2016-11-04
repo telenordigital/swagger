@@ -3,8 +3,8 @@
 	"ensureUniqueParams": true,
 	"modelPropertyNaming": "camelCase",
 	"supportsES6": false,
-	"npmName": null,
-	"npmVersion": null,
-	"npmRepository": null,
+	"npmName": "",
+	"npmVersion": "",
+	"npmRepository": "",
 	"snapshot": false
 }

@@ -1,6 +1,6 @@
 {
 	"sortParamsByRequiredFlag": true,
 	"ensureUniqueParams": true,
-	"modelPackage": null,
-	"apiPackage": null
+	"modelPackage": "",
+	"apiPackage": ""
 }

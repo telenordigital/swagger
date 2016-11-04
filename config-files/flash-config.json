@@ -1,6 +1,6 @@
 {
 	"packageName": "io.swagger",
 	"packageVersion": "1.0.0",
-	"invokerPackage": null,
-	"sourceFolder": null
+	"invokerPackage": "",
+	"sourceFolder": ""
 }

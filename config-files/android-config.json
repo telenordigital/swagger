@@ -1,13 +1,13 @@
 {
 	"sortParamsByRequiredFlag": true,
 	"ensureUniqueParams": true,
-	"modelPackage": null,
-	"apiPackage": null,
-	"invokerPackage": null,
-	"groupId": null,
-	"artifactId": null,
-	"artifactVersion": null,
-	"sourceFolder": null,
+	"modelPackage": "",
+	"apiPackage": "",
+	"invokerPackage": "",
+	"groupId": "",
+	"artifactId": "",
+	"artifactVersion": "",
+	"sourceFolder": "",
 	"useAndroidMavenGradlePlugin": true,
-	"library": null
+	"library": ""
 }

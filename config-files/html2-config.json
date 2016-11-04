@@ -1,14 +1,14 @@
 {
 	"sortParamsByRequiredFlag": true,
 	"ensureUniqueParams": true,
-	"appName": null,
-	"appDescription": null,
-	"infoUrl": null,
-	"infoEmail": null,
-	"licenseInfo": null,
-	"licenseUrl": null,
-	"invokerPackage": null,
-	"groupId": null,
-	"artifactId": null,
-	"artifactVersion": null
+	"appName": "",
+	"appDescription": "",
+	"infoUrl": "",
+	"infoEmail": "",
+	"licenseInfo": "",
+	"licenseUrl": "",
+	"invokerPackage": "",
+	"groupId": "",
+	"artifactId": "",
+	"artifactVersion": ""
 }
