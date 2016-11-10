@@ -14,10 +14,11 @@ externalDocs:
   url: http://docs.telenordigital.com
   description: More info, and getting started guides available at docs.telenordigital.com
 basePath: /
-host: localhost:10106
+# host: localhost:10106
+host: staging.payment.telenordigital.com
 showRequestHeaders: true
 schemes:
-  - http
+  # - http
   - https
 consumes:
   - application/json
@@ -58,8 +59,8 @@ paths:
         description: Transaction ID
         required: true
         type: string
-      description: Whatever2
-      summary: whatever
+      description: Get the payment page where the end user can choose the payment method and finish the purchase. Your page should redirect the user here when the transaction has been successfully prepared.
+      summary: Get Transaction by ID
       operationId: getTransactionById
       security:
         - telenorDigitalBasicAuth: []
@@ -504,4 +505,3 @@ definitions:
         default: R//P1M
       verificationTransaction:
         $ref: '#/definitions/VerificationTransaction'
-
